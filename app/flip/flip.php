@@ -55,7 +55,7 @@ class Flip {
         $flippedText = " ┻━┻";
 
         if(!empty($text)) {
-            $flippedText = ' ';
+            //$flippedText = ' ';
             $strlen = strlen($text);
             for( $i = 0; $i <= $strlen; $i++ ) {
                 $char = substr( $text, $i, 1 );
@@ -63,6 +63,6 @@ class Flip {
             }
         }
 
-        return $guyText . $flippedText;
+        return $guyText . ' ' . strrev($flippedText);
     }
 }
