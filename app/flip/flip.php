@@ -57,12 +57,10 @@ class Flip {
         if(!empty($text)) {
             $flippedText = ' ';
             $strlen = strlen($text);
-            for( $i = $strlen; $i <= 1; $i-- ) {
+            for( $i = $strlen; $i < 0; $i-- ) {
                 $char = substr( $text, $i, 1 );
                 $flippedText .= isset($this->flipTable[$char]) ? $this->flipTable[$char] : '';
             }
         }
-
         return $guyText . $flippedText;
-    
 }
