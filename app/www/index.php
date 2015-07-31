@@ -121,7 +121,7 @@ Flight::route('POST /slash', function(){
             ));
 
         // You can get your webhook endpoint from your Slack settings
-        $ch = curl_init("https://hooks.slack.com/services/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");
+        $ch = curl_init(OUR_URL_FLIP);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

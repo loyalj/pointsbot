@@ -49,7 +49,6 @@ class PointBot {
             ['$group' => ['_id' => '$award', 'value' => ['$sum' => '$value']]],
             ['$match' => ['value' => ['$ne' => 0]]],
             ['$sort'  => ['value' => -1]],
-            ['$limit' => 10] 
         ]);
         if(empty($userStats['result'])) {
             return '';
