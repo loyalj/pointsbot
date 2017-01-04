@@ -32,13 +32,21 @@ Flight::route('POST /', function(){
 
     $pointBot = new PointBot();
     
+    // Remove skin tone from the trigger word - it doesn't matter for triggering the action
+    if(preg_match("/^(:thumbsup::skin-tone-\d:)$/", $triggerWord) === 1) {
+        $triggerWord = ":thumbsup:";
+    } else if(preg_match("/^(:thumbsdown::skin-tone-\d:)$/", $triggerWord) === 1) {
+        $triggerWord = ":thumbsdown:";
+    }
+
     switch ($triggerWord) {
         case ':thumbsup:':
+        case ':thumbsup-all:':
         case ':thumbsdown:':
         case ':+1:':
         case ':-1:':
 	    $messageMatches = null;
-	    $pattern = '/(:[\+\-]1:|:thumbsup:|:thumbsdown:)\s+[\+\-]?([0-9]+)?\s*(["\'\:_a-zA-Z0-9\s]*)(<\@[a-zA-Z0-9]+>).*$/i';
+	    $pattern = '^(:[\+\-]1:|:thumbsup:|:thumbsdown:|:thumbsup::skin-tone-\d:|:thumbsdown::skin-tone-\d:|:thumbsup_all:)\s+[\+\-]?([0-9]+)?\s*(.*)(<\@[a-zA-Z0-9]+>).*$/i';
 	    preg_match($pattern, $messageText, $messageMatches);
 
 	    // Validate we got a good token, user, message, and enough message tokens

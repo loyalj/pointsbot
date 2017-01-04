@@ -12,8 +12,16 @@ class PointBot {
         if($awardValue == null) {
             $awardValue = 1;
         }
+
+        // Remove skin tone from the action - it doesn't matter for triggering the action
+        if(preg_match("/^(:thumbsup::skin-tone-\d:)$/", $action) === 1) {
+            $action = ":thumbsup:";
+        } else if(preg_match("/^(:thumbsdown::skin-tone-\d:)$/", $action) === 1) {
+            $action = ":thumbsdown:";
+        }
         
         switch ($action){
+            case ':thumbsup-all:':
             case ':thumbsup:':
             case ':+1:':
                 $saveAction = 'gave';
