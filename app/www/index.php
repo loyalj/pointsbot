@@ -39,29 +39,29 @@ Flight::route('POST /', function(){
         case ':thumbsdown:':
         case ':+1:':
         case ':-1:':
-	    $messageMatches = null;
-        $pattern = '/^(:[\+\-]?(?:1|thumbs(?:up|down))(?:_all)?:(?::skin-tone-\d:)?)\s+[\+\-]?([0-9]+)?\s*(.*)(<\@[a-zA-Z0-9]+>).*$/i';
-	    preg_match($pattern, $messageText, $messageMatches);
+	        $messageMatches = null;
+            $pattern = '/^(:[\+\-]?(?:1|thumbs(?:up|down))(?:_all)?:(?::skin-tone-\d:)?)\s+[\+\-]?([0-9]+)?\s*(.*)(<\@[a-zA-Z0-9]+>).*$/i';
+	        preg_match($pattern, $messageText, $messageMatches);
 	    
-        // Validate we got a good token, user, message, and enough message tokens
-	    if((empty($fromUser) || empty($messageText) || count($messageMatches) != 5)) {
-	    	exit;
-	    }
+            // Validate we got a good token, user, message, and enough message tokens
+	        if((empty($fromUser) || empty($messageText) || count($messageMatches) != 5)) {
+	    	    exit;
+	        }
 	    
-        // Grab the parts of our message so we can process them
-	    $action        = trim($messageMatches[1]);
-	    $awardValue    = trim($messageMatches[2]);
-	    $awardType     = trim($messageMatches[3]);
-	    $toUser        = trim($messageMatches[4]);
-	    $fromUser      = '<@' . $fromUser . '>';
+            // Grab the parts of our message so we can process them
+	        $action        = trim($messageMatches[1]);
+	        $awardValue    = trim($messageMatches[2]);
+	        $awardType     = trim($messageMatches[3]);
+	        $toUser        = trim($messageMatches[4]);
+	        $fromUser      = '<@' . $fromUser . '>';
 	    
-	    $result = $pointBot->recordTransaction($action, $awardValue, $awardType, $toUser, $fromUser);
+	        $result = $pointBot->recordTransaction($action, $awardValue, $awardType, $toUser, $fromUser);
 
-	break;
-	case 'pbstat':
-        $messageMatches = null;
-	    $pattern = '/(pbstat)\s*(<\@[a-zA-Z0-9]*>)?.*/i';
-	    preg_match($pattern, $messageText, $messageMatches);
+	    break;
+	    case 'pbstat':
+            $messageMatches = null;
+	        $pattern = '/(pbstat)\s*(<\@[a-zA-Z0-9]*>)?.*/i';
+	        preg_match($pattern, $messageText, $messageMatches);
 
             $user = '<@' . $fromUser . '>';
             
@@ -70,7 +70,7 @@ Flight::route('POST /', function(){
             }
 
             $result = $pointBot->getUserStats($user);
-	break;
+	    break;
         case 'pbgive':
             $result = $pointBot->getTopGiver();
         break;
