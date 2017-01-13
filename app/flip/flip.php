@@ -2,7 +2,7 @@
 
 class Flip {
     
-    private $flipTable = [
+    private $flipTable = array(
         " " => "  ",
         "a" => "ɐ",
         "b" => "q",
@@ -38,10 +38,10 @@ class Flip {
         "[" => "]",
         "{" => "}",
         "(" => ")",
-    ];
+    );
 
     function __construct() {
-        $flippedTable = [];
+        $flippedTable = array();
         foreach($this->flipTable as $key => $el) {
             $flippedTable[$el] = $key; 
         }
@@ -57,10 +57,11 @@ class Flip {
         if(!empty($text)) {
             $flippedText = ' ';
             $strlen = strlen($text);
-            for( $i = $strlen-1; $i < 1; $i-- ) {
-                $char = substr( $text, $i, 1 );
-                $flippedText .= isset($this->flipTable[$char]) ? $this->flipTable[$char] : '';
+            for( $i = $strlen-1; $i >= 0; $i-- ) {
+                $char = substr( $text, $i, 1);
+                $flippedText .= isset($this->flipTable[$char]) ? $this->flipTable[$char] : '*';
             }
         }
         return $guyText . $flippedText;
+    }
 }

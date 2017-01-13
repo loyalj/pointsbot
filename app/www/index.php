@@ -1,4 +1,5 @@
 <?php
+
 require '../flight/Flight.php';
 require '../token.php';
 require '../pointbot/pointbot.php';
@@ -10,7 +11,7 @@ require '../flip/flip.php';
 *
 */
 Flight::route('GET /', function(){
-   echo "ptBot v0";
+   echo "ptBot v1";
 });
 
 /*
@@ -54,6 +55,7 @@ Flight::route('POST /', function(){
 	    $fromUser      = '<@' . $fromUser . '>';
 	    
 	    $result = $pointBot->recordTransaction($action, $awardValue, $awardType, $toUser, $fromUser);
+
 	break;
 	case 'pbstat':
             $messageMatches = null;
@@ -80,7 +82,7 @@ Flight::route('POST /', function(){
     }
     
     header('Content-Type: application/json');
-    echo json_encode(['text'=> $result]);
+    echo json_encode(array('text'=> $result));
 });
 
 
@@ -93,7 +95,7 @@ Flight::route('POST /slash', function(){
     $commandWord   = $request->data['command'];
     $channelName   = $request->data['channel_name'];
     
-    if(empty($commandWord) ||  !in_array($token, [OUR_TOKEN_FLIP, OUR_TOKEN_COOKIE])) {
+    if(empty($commandWord) ||  !in_array($token, array(OUR_TOKEN_FLIP, OUR_TOKEN_COOKIE))) {
         exit;
     }
     
@@ -108,7 +110,7 @@ Flight::route('POST /slash', function(){
         case '/cookie':
             $result = "You want the cookie?  COME AND GET IT!!";
             $botName = "Cookie Monster";
-            $botIcon = ":cookie_monster:";
+            $botIcon = ":cookie:";
         break;
     }
     

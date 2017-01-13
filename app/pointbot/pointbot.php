@@ -4,11 +4,11 @@ class PointBot {
 
     private $mongoServer = 'mongodb://mongodb:27017';
     
-    public function recordTransaction($action, $awardValue, $awardType, $toUser, $fromUser) { 
-        $mongo = new MongoClient($this->mongoServer);
+    public function recordTransaction($action, $awardValue, $awardType, $toUser, $fromUser) {
+        //$mongo = new MongoClient($this->mongoServer);
+        $mongo = new MongoClient();
         $db = $mongo->highscores;
         $collection = $db->ledger;
-
         if($awardValue == null) {
             $awardValue = 1;
         }
@@ -27,29 +27,30 @@ class PointBot {
             break;
         }
 
-        $collection->insert([
+        $collection->insert(array(
            'action' => $saveAction,
            'from'   => $fromUser,
            'to'     => $toUser,
            'award'  => $awardType,
            'value'  => (int) $awardValue
-        ]);
+        ));
 
         return $returnMessage;
     }
 
     public function getUserStats($user) {
 
-        $mongo = new MongoClient($this->mongoServer);
+        //$mongo = new MongoClient($this->mongoServer);
+        $mongo = new MongoClient();
         $db = $mongo->highscores;
         $collection = $db->ledger;
         
-        $userStats = $collection->aggregate([
-            ['$match' => ['to' => $user]],
-            ['$group' => ['_id' => '$award', 'value' => ['$sum' => '$value']]],
-            ['$match' => ['value' => ['$ne' => 0]]],
-            ['$sort'  => ['value' => -1]],
-        ]);
+        $userStats = $collection->aggregate(array(
+            array('$match' => array('to' => $user)),
+            array('$group' => array('_id' => '$award', 'value' => array('$sum' => '$value'))),
+            array('$match' => array('value' => array('$ne' => 0))),
+            array('$sort'  => array('value' => -1)),
+        ));
         if(empty($userStats['result'])) {
             return '';
         }
@@ -65,17 +66,18 @@ class PointBot {
 
     public function getTopGiver() {
         
-        $mongo = new MongoClient($this->mongoServer);
+        //$mongo = new MongoClient($this->mongoServer);
+        $mongo = new MongoClient();
         $db = $mongo->highscores;
         $collection = $db->ledger;
         
 
-        $userStats = $collection->aggregate([
-            ['$match' => ['value' => ['$gte' => 0]]], 
-            ['$group' => ['_id' => '$from', 'value' => ['$sum' => '$value']]],
-            ['$match' => ['value' => ['$ne' => 0]]],
-            ['$sort'  => ['value' => -1]]
-        ]);
+        $userStats = $collection->aggregate(array(
+            array('$match' => array('value' => array('$gte' => 0))), 
+            array('$group' => array('_id' => '$from', 'value' => array('$sum' => '$value'))),
+            array('$match' => array('value' => array('$ne' => 0))),
+            array('$sort'  => array('value' => -1))
+        ));
         if(empty($userStats['result'])) {
             return '';
         }
@@ -107,7 +109,7 @@ class PointBot {
 
         $result .= "*Actions*\n";
         $result .= ">/tableflip <some letters> - deploys the Rage-Bot-10000 in the current channel. If <some letters> are included, they get flipped instead!\n";
-        $result .= ">/cookie - Cast level 5 COOKIE MONSTER to throw some shade at others in the current channel!\n\n";
+//        $result .= ">/cookie - Cast level 5 COOKIE MONSTER to throw some shade at others in the current channel!\n\n";
 
         $result .= "*Misc Commands*\n";
         $result .= ">_pbhelp_ - Shows the PointsBot help\n";
