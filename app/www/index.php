@@ -30,32 +30,25 @@ Flight::route('POST /', function(){
     if(empty($triggerWord) || $token != OUR_TOKEN) {
         exit;
     }
-
+    
     $pointBot = new PointBot();
     
-    // Remove skin tone from the trigger word - it doesn't matter for triggering the action
-    if(preg_match("/^(:thumbsup::skin-tone-\d:)$/", $triggerWord) === 1) {
-        $triggerWord = ":thumbsup:";
-    } else if(preg_match("/^(:thumbsdown::skin-tone-\d:)$/", $triggerWord) === 1) {
-        $triggerWord = ":thumbsdown:";
-    }
-
     switch ($triggerWord) {
         case ':thumbsup:':
-        case ':thumbsup-all:':
+        case ':thumbsup_all:':
         case ':thumbsdown:':
         case ':+1:':
         case ':-1:':
 	    $messageMatches = null;
-	    $pattern = '^(:[\+\-]1:|:thumbsup:|:thumbsdown:|:thumbsup::skin-tone-\d:|:thumbsdown::skin-tone-\d:|:thumbsup_all:)\s+[\+\-]?([0-9]+)?\s*(.*)(<\@[a-zA-Z0-9]+>).*$/i';
+        $pattern = '/^(:[\+\-]?(?:1|thumbs(?:up|down))(?:_all)?:(?::skin-tone-\d:)?)\s+[\+\-]?([0-9]+)?\s*(.*)(<\@[a-zA-Z0-9]+>).*$/i';
 	    preg_match($pattern, $messageText, $messageMatches);
-
-	    // Validate we got a good token, user, message, and enough message tokens
+	    
+        // Validate we got a good token, user, message, and enough message tokens
 	    if((empty($fromUser) || empty($messageText) || count($messageMatches) != 5)) {
-		exit;
+	    	exit;
 	    }
-
-	    // Grab the parts of our message so we can process them
+	    
+        // Grab the parts of our message so we can process them
 	    $action        = trim($messageMatches[1]);
 	    $awardValue    = trim($messageMatches[2]);
 	    $awardType     = trim($messageMatches[3]);
@@ -66,7 +59,7 @@ Flight::route('POST /', function(){
 
 	break;
 	case 'pbstat':
-            $messageMatches = null;
+        $messageMatches = null;
 	    $pattern = '/(pbstat)\s*(<\@[a-zA-Z0-9]*>)?.*/i';
 	    preg_match($pattern, $messageText, $messageMatches);
 

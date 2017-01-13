@@ -14,21 +14,18 @@ class PointBot {
         }
 
         // Remove skin tone from the action - it doesn't matter for triggering the action
-        if(preg_match("/^(:thumbsup::skin-tone-\d:)$/", $action) === 1) {
+        if(preg_match("/^(:(?:\+1|thumbsup)(?:_all)?:(?::skin-tone-\d:)?)$/i", $action) === 1) {
             $action = ":thumbsup:";
-        } else if(preg_match("/^(:thumbsdown::skin-tone-\d:)$/", $action) === 1) {
+        } else if(preg_match("/^(:(?:\-1|thumbsdown)(?:_all)?:(?::skin-tone-\d:)?)$/i", $action) === 1) {
             $action = ":thumbsdown:";
         }
         
         switch ($action){
-            case ':thumbsup-all:':
             case ':thumbsup:':
-            case ':+1:':
                 $saveAction = 'gave';
                 $returnMessage = $fromUser . ' has granted '. $awardValue . ' ' . $awardType . ' to ' . $toUser;
             break;
             case ':thumbsdown:':
-            case ':-1:':
                 $awardValue *= -1;
                 $saveAction = 'took';
                 $returnMessage = $fromUser . ' has taken ' .  abs($awardValue) . ' ' . $awardType . ' from ' . $toUser;
