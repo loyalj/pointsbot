@@ -12,7 +12,7 @@ class MiniPG {
 	function __construct($databaseUrl) {
         $url = substr($databaseUrl, 0, strrpos($databaseUrl, '/'));
         echo $url . "\n\n";
-        $database = substr($databaseUrl, strrpos($databaseUrl, '/'));
+        $database = substr($databaseUrl, strrpos($databaseUrl, '/') + 1);
         echo $database . "\n\n" ;
 
         $parsedUrl = parse_url($url);
@@ -31,12 +31,12 @@ class MiniPG {
 
 
     public function testConnection() {
-        /*$pgConn = pg_connect($this->connectString);
+        $pgConn = pg_connect($this->connectString);
         $result = pg_query($pg_conn, "SELECT relname FROM pg_stat_user_tables WHERE schemaname='public'");
 
         if (!pg_num_rows($result)) {
             echo "\n\nYour connection is working, but your database is empty.\nFret not. This is expected for new apps.\n";
-        }*/
+        }
 
     }
 	
