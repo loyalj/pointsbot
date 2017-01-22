@@ -1,7 +1,6 @@
 <?php
 
 require '../flight/Flight.php';
-require '../token.php';
 require '../pointbot/pointbot.php';
 require '../flip/flip.php';
 
