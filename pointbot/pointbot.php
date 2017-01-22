@@ -2,13 +2,13 @@
 
 class PointBot {
 
-    private $mongoServer = 'mongodb://mongodb:27017';
+    //private $mongoServer = 'mongodb://mongodb:27017';
     
     public function recordTransaction($action, $awardValue, $awardType, $toUser, $fromUser) {
         //$mongo = new MongoClient($this->mongoServer);
-        $mongo = new MongoClient();
+        /*$mongo = new MongoClient();
         $db = $mongo->highscores;
-        $collection = $db->ledger;
+        $collection = $db->ledger;*/
         if($awardValue == null) {
             $awardValue = 1;
         }
@@ -24,30 +24,30 @@ class PointBot {
         }
         
 
-        $collection->insert(array(
+        // write to mongo
+        /*$collection->insert(array(
            'action' => $saveAction,
            'from'   => $fromUser,
            'to'     => $toUser,
            'award'  => $awardType,
            'value'  => (int) $awardValue
-        ));
+        ));*/
 
         return $returnMessage;
     }
 
     public function getUserStats($user) {
 
-        //$mongo = new MongoClient($this->mongoServer);
-        $mongo = new MongoClient();
+        /*$mongo = new MongoClient();
         $db = $mongo->highscores;
-        $collection = $db->ledger;
+        $collection = $db->ledger;*/
         
-        $userStats = $collection->aggregate(array(
+        /*$userStats = $collection->aggregate(array(
             array('$match' => array('to' => $user)),
             array('$group' => array('_id' => '$award', 'value' => array('$sum' => '$value'))),
             array('$match' => array('value' => array('$ne' => 0))),
             array('$sort'  => array('value' => -1)),
-        ));
+        ));*/
         if(empty($userStats['result'])) {
             return '';
         }
@@ -64,7 +64,7 @@ class PointBot {
     public function getTopGiver() {
         
         //$mongo = new MongoClient($this->mongoServer);
-        $mongo = new MongoClient();
+        /*$mongo = new MongoClient();
         $db = $mongo->highscores;
         $collection = $db->ledger;
         
@@ -74,7 +74,7 @@ class PointBot {
             array('$group' => array('_id' => '$from', 'value' => array('$sum' => '$value'))),
             array('$match' => array('value' => array('$ne' => 0))),
             array('$sort'  => array('value' => -1))
-        ));
+        ));*/
         if(empty($userStats['result'])) {
             return '';
         }

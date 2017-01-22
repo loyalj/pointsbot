@@ -11,8 +11,6 @@ require '../flip/flip.php';
 */
 Flight::route('GET /', function(){
    echo "ptBot v1";
-
-   echo getenv('OUR_TOKEN');
 });
 
 /*
@@ -98,8 +96,10 @@ Flight::route('POST /slash', function(){
     $messageText   = $request->data['text'];
     $commandWord   = $request->data['command'];
     $channelName   = $request->data['channel_name'];
+
+    $ourTokenFlip = getenv('OUR_TOKEN_FLIP');
     
-    if(empty($commandWord) ||  !in_array($token, array(OUR_TOKEN_FLIP, OUR_TOKEN_COOKIE))) {
+    if(empty($commandWord) ||  !in_array($token, array($ourTokenFlip))) {
         exit;
     }
     
@@ -110,11 +110,6 @@ Flight::route('POST /slash', function(){
             $result = $flipper->flipText($messageText);
             $botName = "RAGE-BOT-10000";
             $botIcon = ":rage4:";
-        break;
-        case '/cookie':
-            $result = "You want the cookie?  COME AND GET IT!!";
-            $botName = "Cookie Monster";
-            $botIcon = ":cookie:";
         break;
     }
     
