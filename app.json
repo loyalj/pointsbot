@@ -4,7 +4,7 @@
   "repository": "https://github.com/loyalj/pointsbot",
   "addons": ["heroku-postgresql:hobby-dev"],
   "scripts": {
-    "postdeploy": "heroku pg:psql < /app/scripts/load_db.sql"
+    "postdeploy": "psql DATABASE_URL < /app/scripts/load_db.sql"
   },
 
   "env": {
