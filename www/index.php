@@ -1,9 +1,9 @@
 <?php
-require '../vendor/autoload.php';
-require '../flight/Flight.php';
-require '../pointbot/pointbot.php';
-require '../flip/flip.php';
-require '../lib/minipg.php';
+require_once '../vendor/autoload.php';
+require_once '../flight/Flight.php';
+require_once '../pointbot/pointbot.php';
+require_once '../flip/flip.php';
+require_once '../lib/minipg.php';
 
 
 /*

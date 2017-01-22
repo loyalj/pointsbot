@@ -1,6 +1,6 @@
 <?php
 
-require '../lib/minipg.php';
+require_once '../lib/minipg.php';
 
 class PointBot {
 
