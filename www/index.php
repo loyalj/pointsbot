@@ -11,6 +11,8 @@ require '../flip/flip.php';
 */
 Flight::route('GET /', function(){
    echo "ptBot v1";
+
+   echo getenv('OUR_TOKEN');
 });
 
 /*
@@ -25,8 +27,10 @@ Flight::route('POST /', function(){
     $fromUser      = $request->data['user_id'];
     $messageText   = $request->data['text'];
     $triggerWord   = $request->data['trigger_word'];
+
+    $ourToken = getenv('OUR_TOKEN');
     
-    if(empty($triggerWord) || $token != OUR_TOKEN) {
+    if(empty($triggerWord) || $token != $ourToken) {
         exit;
     }
     
