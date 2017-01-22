@@ -35,9 +35,11 @@ class MiniPG {
         $db = new PDO($this->pdoString);
 
         if(!$db) {
+            $db = null;
             return false;
         }
 
+        $db = null;
         return true;
     }
 	
