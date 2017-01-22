@@ -10,14 +10,19 @@ class MiniPG {
 
 	function __construct($databaseUrl) {
 
-        extract(parse_url(($databaseUrl)));
+        $url = substr($databaseUrl, 0, strpos($databaseUrl, ':'));
+        $path = substr($databaseUrl, strpos($databaseUrl, ':') + 1);
 
-        $this->user = $user;
-        $this->password = $pass;
-        $this->host = $host;
+        $parsedUrl = parse_url($url);
+
+
+        $this->user = $parsedUrl['user'];
+        $this->password = $parsedUrl['pass'];
+        $this->host = $parsedUrl['host'];
         $this->path = $path;
 
-        $this->connectString = "user=$user password=$pass host=$host dbname=" . substr($path, 1);
+        $this->connectString = "user={$this->user} password={$this->pass} host={$this->host} dbname=" . substr($path, 1);
+        echo $this->connectString;
 	}
 
 
