@@ -11,15 +11,11 @@ require '../lib/minipg.php';
 *
 */
 Flight::route('GET /', function(){
+    $databaseUrl = getenv('DATABASE_URL');
+    $miniPg = new MiniPG($databaseUrl);
 
-    $databaseUrl = getenv('DATABSE_URL');
-   
-   $miniPg = new MiniPG($databaseUrl);
-
-
-
-   echo "ptBot v1";
-   $miniPg->testConnection();
+    echo "ptBot v1";
+    $miniPg->testConnection();
 });
 
 /*
