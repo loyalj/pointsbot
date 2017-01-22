@@ -11,13 +11,9 @@ class MiniPG {
 
 	function __construct($databaseUrl) {
         $url = substr($databaseUrl, 0, strrpos($databaseUrl, '/'));
-        echo $url . "\n\n";
         $database = substr($databaseUrl, strrpos($databaseUrl, '/') + 1);
-        echo $database . "\n\n" ;
 
         $parsedUrl = parse_url($url);
-        print_r($parsedUrl);
-        echo "\n\n";
 
         $this->user = $parsedUrl['user'];
         $this->password = $parsedUrl['pass'];
@@ -26,18 +22,12 @@ class MiniPG {
         $this->database = $database;
 
         $this->connectString = "user={$this->user} password={$this->password} host={$this->host} port={$this->port} dbname={$this->database}";
-        echo $this->connectString;
 	}
 
 
     public function testConnection() {
         $pgConn = pg_connect($this->connectString);
         $result = pg_query($pgConn, "SELECT relname FROM pg_stat_user_tables WHERE schemaname='public'");
-
-        if (!pg_num_rows($result)) {
-            echo "\n\nYour connection is working, but your database is empty.\nFret not. This is expected for new apps.\n";
-        }
-
     }
 	
 

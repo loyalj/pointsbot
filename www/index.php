@@ -37,8 +37,12 @@ Flight::route('POST /', function(){
         exit;
     }
     
-    $pointBot = new PointBot();
+    // get the db info and start up the bot
+    $databaseUrl = getenv('DATABASE_URL');
+    $pointBot = new PointBot($databaseUrl);
     
+
+    // Figure out which action to execute TODO: move to inside the bot so controller doesn't know any of this info!
     switch ($triggerWord) {
         case ':thumbsup:':
         case ':thumbsup_all:':

@@ -1,14 +1,19 @@
 <?php
 
+require '../lib/minipg.php';
+
 class PointBot {
 
     //private $mongoServer = 'mongodb://mongodb:27017';
+    private $miniPg = null;
+
+    function __construct($databaseUrl) {
+        $databaseUrl = getenv('DATABASE_URL');
+        $this->miniPg = new MiniPG($databaseUrl);
+    }
     
     public function recordTransaction($action, $awardValue, $awardType, $toUser, $fromUser) {
-        //$mongo = new MongoClient($this->mongoServer);
-        /*$mongo = new MongoClient();
-        $db = $mongo->highscores;
-        $collection = $db->ledger;*/
+        
         if($awardValue == null) {
             $awardValue = 1;
         }
@@ -23,6 +28,11 @@ class PointBot {
             $returnMessage = $fromUser . ' has taken ' .  abs($awardValue) . ' ' . $awardType . ' from ' . $toUser;
         }
         
+
+        //$mongo = new MongoClient($this->mongoServer);
+        /*$mongo = new MongoClient();
+        $db = $mongo->highscores;
+        $collection = $db->ledger;*/
 
         // write to mongo
         /*$collection->insert(array(
@@ -48,6 +58,7 @@ class PointBot {
             array('$match' => array('value' => array('$ne' => 0))),
             array('$sort'  => array('value' => -1)),
         ));*/
+
         if(empty($userStats['result'])) {
             return '';
         }
@@ -75,6 +86,7 @@ class PointBot {
             array('$match' => array('value' => array('$ne' => 0))),
             array('$sort'  => array('value' => -1))
         ));*/
+
         if(empty($userStats['result'])) {
             return '';
         }
@@ -106,7 +118,6 @@ class PointBot {
 
         $result .= "*Actions*\n";
         $result .= ">/tableflip <some letters> - deploys the Rage-Bot-10000 in the current channel. If <some letters> are included, they get flipped instead!\n";
-//        $result .= ">/cookie - Cast level 5 COOKIE MONSTER to throw some shade at others in the current channel!\n\n";
 
         $result .= "*Misc Commands*\n";
         $result .= ">_pbhelp_ - Shows the PointsBot help\n";
