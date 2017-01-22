@@ -3,4 +3,11 @@
   "description": "pbv2",
   "repository": "https://github.com/loyalj/pointsbot",
   "addons": []
+
+  "env": {
+    "TEST_VAR": {
+      "description": "This is your slack token from some page",
+      "value": "xxxxxxxxxxxxxxxxx"
+    }
+  }
 }
