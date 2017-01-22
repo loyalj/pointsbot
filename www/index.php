@@ -15,7 +15,12 @@ Flight::route('GET /', function(){
     $miniPg = new MiniPG($databaseUrl);
 
     echo "ptBot v1";
-    $miniPg->testConnection();
+    
+    $conn = $miniPg->testConnection();
+
+    if($conn) {
+        echo "Connection made";
+    }
 });
 
 /*
