@@ -19,6 +19,7 @@ Flight::route('GET /', function(){
 
 
    echo "ptBot v1";
+   $miniPg->testConnection();
 });
 
 /*
