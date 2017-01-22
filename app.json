@@ -2,12 +2,24 @@
   "name": "Pointsbot Hero",
   "description": "pbv2",
   "repository": "https://github.com/loyalj/pointsbot",
-  "addons": []
+  "addons": [],
 
   "env": {
-    "TEST_VAR": {
-      "description": "This is your slack token from some page",
+    "OUR_TOKEN": {
+      "description": "This is your slack token for the outgoing webhook integration",
       "value": "xxxxxxxxxxxxxxxxx"
+    },
+    "OUR_TOKEN_FLIP": {
+      "description": "This is the token for the table flip",
+      "value": "xxxxxxxxxxxxxxxxxxxxxxxx"
+    },
+    "OUR_URL_FLIP": {
+      "description": "This is the URL for incoming webhook on slack",
+      "value": "xxxxxxxxxxxxxxxxxxxxxxxx"
+    },
+    "OUR_TOKEN_COOKIE": {
+      "description": "this is the slack token cookie for the incoming webhook",
+      "value": "xxxxxxxxxxxxxxxxxxxxxxxx"
     }
   }
 }
