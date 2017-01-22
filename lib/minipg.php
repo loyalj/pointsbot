@@ -9,9 +9,9 @@ class MiniPG {
     private $connectString = null;
 
 	function __construct($databaseUrl) {
-        $url = substr($databaseUrl, 0, strpos($databaseUrl, ':'));
+        $url = substr($databaseUrl, 0, strrpos($databaseUrl, ':'));
         echo $url . "\n\n";
-        $path = substr($databaseUrl, strpos($databaseUrl, ':') + 1);
+        $path = substr($databaseUrl, strrpos($databaseUrl, ':') + 1);
         echo $path . "\n\n" ;
 
         $parsedUrl = parse_url($url);
