@@ -34,7 +34,7 @@ class MiniPG {
         //$result = pg_query($pgConn, "SELECT relname FROM pg_stat_user_tables WHERE schemaname='public'");
 
         $db = new PDO($this->pdoString);
-print_r(var_dump($db);
+print_r(var_dump($db));
         if(!$db) {
             $db = null;
             return false;
