@@ -2,7 +2,7 @@
   "name": "Pointsbot Hero",
   "description": "pbv2",
   "repository": "https://github.com/loyalj/pointsbot",
-  "addons": [],
+  "addons": ["heroku-postgresql:hobby-dev"],
 
   "env": {
     "OUR_TOKEN": {
