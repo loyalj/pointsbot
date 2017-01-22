@@ -19,6 +19,6 @@
     }
   },
   "scripts": {
-    "postdeploy": "php /scripts/load_db.php"
+    "postdeploy": "php ./scripts/load_db.php"
   }
 }
