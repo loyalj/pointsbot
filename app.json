@@ -3,6 +3,9 @@
   "description": "pbv2",
   "repository": "https://github.com/loyalj/pointsbot",
   "addons": ["heroku-postgresql:hobby-dev"],
+  "scripts": {
+    "postdeploy": "pg:psql DATABASE_URL < ./scripts/load_db.sql"
+  },
 
   "env": {
     "OUR_TOKEN": {
