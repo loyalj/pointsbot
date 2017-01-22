@@ -9,12 +9,14 @@ class MiniPG {
     private $connectString = null;
 
 	function __construct($databaseUrl) {
-
+        echo $databaseUrl;
         $url = substr($databaseUrl, 0, strpos($databaseUrl, ':'));
+        echo $url;
         $path = substr($databaseUrl, strpos($databaseUrl, ':') + 1);
+        echo $path;
 
         $parsedUrl = parse_url($url);
-
+        print_r($parsedUrl);
 
         $this->user = $parsedUrl['user'];
         $this->password = $parsedUrl['pass'];
