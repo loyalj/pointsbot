@@ -12,6 +12,7 @@ class MiniPG {
     private $pdoString = null;
 
 	function __construct($databaseUrl) {
+        
         $url = substr($databaseUrl, 0, strrpos($databaseUrl, '/'));
         $database = substr($databaseUrl, strrpos($databaseUrl, '/') + 1);
 
@@ -33,7 +34,7 @@ class MiniPG {
         //$result = pg_query($pgConn, "SELECT relname FROM pg_stat_user_tables WHERE schemaname='public'");
 
         $db = new PDO($this->pdoString);
-print_r($db);
+print_r(var_dump($db);
         if(!$db) {
             $db = null;
             return false;
