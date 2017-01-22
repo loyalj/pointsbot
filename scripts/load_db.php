@@ -19,7 +19,7 @@ $query = "CREATE TABLE awards (
     to         varchar(40) NOT NULL,
     award      varchar(40),
     value      integer NOT NULL
-);"
+);";
 
 $miniPg->query($query);
 
