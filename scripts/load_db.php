@@ -9,9 +9,11 @@ $databaseUrl = getenv('DATABASE_URL');
 $miniPg = new MiniPG($databaseUrl);
 
 
+/*$query = 'action' => $saveAction,
          'from'   => $fromUser,
          'to'     => $toUser,
          'award'  => $awardType,
+         'value'  => (int) $awardValue*/
 
 $query = "CREATE TABLE awards (
     action     varchar(40) CONSTRAINT firstkey PRIMARY KEY,
