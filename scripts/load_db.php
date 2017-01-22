@@ -1,6 +1,6 @@
 <?php
-require_once '../vendor/autoload.php';
-require_once '../lib/minipg.php';
+require_once '/app/vendor/autoload.php';
+require_once '/app/lib/minipg.php';
 
 
 $databaseUrl = getenv('DATABASE_URL');
