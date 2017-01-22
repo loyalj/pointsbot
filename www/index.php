@@ -1,8 +1,9 @@
 <?php
-
+require '../vendor/autoload.php';
 require '../flight/Flight.php';
 require '../pointbot/pointbot.php';
 require '../flip/flip.php';
+require '../lib/minipg.php';
 
 
 /*
@@ -10,6 +11,13 @@ require '../flip/flip.php';
 *
 */
 Flight::route('GET /', function(){
+
+    $databaseUrl = getenv('DATABSE_URL');
+   
+   $miniPg = new MiniPG($databaseUrl);
+
+
+
    echo "ptBot v1";
 });
 

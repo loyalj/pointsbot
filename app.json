@@ -14,7 +14,7 @@
       "value": "xxxxxxxxxxxxxxxxxxxxxxxx"
     },
     "OUR_URL_FLIP": {
-      "description": "This is the URL for incoming webhook on slack",
+      "description": "This is the URL for incoming webhook for the table flip",
       "value": "xxxxxxxxxxxxxxxxxxxxxxxx"
     }
   }
