@@ -7,10 +7,13 @@ class MiniPG {
 	private $host = null;
     private $port = null;
 	private $database = null;
-    
     private $connectString = null;
-    private $pdoString = null;
+    private $db = null;
 
+
+    /*
+    *
+    */
 	function __construct($databaseUrl) {
         
         $url = substr($databaseUrl, 0, strrpos($databaseUrl, '/'));
@@ -23,26 +26,61 @@ class MiniPG {
         $this->host = $parsedUrl['host'];
         $this->port = $parsedUrl['port'];
         $this->database = $database;
-
-        $this->connectString = "user={$this->user} password={$this->password} host={$this->host} port={$this->port} dbname={$this->database}";
-        $this->pdoString = "pgsql:dbname={$this->database};host={$this->host};port={$this->port};user={$this->user};password={$this->password}";
+        $this->connectString = "pgsql:dbname={$this->database};host={$this->host};port={$this->port};user={$this->user};password={$this->password}";
 	}
 
-
+    
+    /*
+    *
+    */
     public function testConnection() {
-        //$pgConn = pg_connect($this->connectString);
-        //$result = pg_query($pgConn, "SELECT relname FROM pg_stat_user_tables WHERE schemaname='public'");
+        $connectStatus = $this->connect();
+        $this->disconnect();
 
-        $db = new PDO($this->pdoString);
-print_r(var_dump($db));
-        if(!$db) {
-            $db = null;
-            return false;
+        return $connectStatus;
+    }
+    
+
+    /*
+    *
+    */
+    private function connect() {
+        try {
+            $this->db = new PDO($this->connectString);
+            if(!$this->db) {
+                return false;
+            }
+
+            return true;
         }
+        catch (PDOException $e) {
+            error_log($e->getMessage());
+            die();
+        }
+    }
 
-        $db = null;
-        return true;
+    
+    /*
+    *
+    */
+    private function disconnect() {
+        $this->db = null;
     }
 	
+    /*
+    *
+    */
+    public function query($query) {
+        try {
+            $this->connect();
+            $results = $this->db->query($query);
+            $this->disconnect();
 
+            return $results;
+        }
+        catch (PDOException $e) {
+            error_log($e->getMessage());
+            die();
+        }
+    }
 }

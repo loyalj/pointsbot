@@ -17,5 +17,9 @@
       "description": "This is the URL for incoming webhook for the table flip",
       "value": "xxxxxxxxxxxxxxxxxxxxxxxx"
     }
-  }
+  },
+
+  "scripts": {
+    "postdeploy": "php scripts/load_db.php"
+  },
 }
