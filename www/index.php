@@ -12,7 +12,7 @@ require_once '../lib/minipg.php';
 */
 Flight::route('GET /', function(){
     $databaseUrl = getenv('DATABASE_URL');
-    $miniPg = new MiniPG($databaseUrl);
+    $pointBot = new PointBot($databaseUrl);
 
     echo "ptBot v1";
     
@@ -36,7 +36,10 @@ Flight::route('POST /', function(){
     if(empty($triggerWord) || $token != $ourToken) {
         exit;
     }
-   
+
+    $databaseUrl = getenv('DATABASE_URL');
+    $pointBot = new PointBot($databaseUrl);
+    
 
     // Figure out which action to execute TODO: move to inside the bot so controller doesn't know any of this info!
     switch ($triggerWord) {
