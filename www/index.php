@@ -11,8 +11,8 @@ require_once '../lib/minipg.php';
 *
 */
 Flight::route('GET /', function(){
-    $databaseUrl = getenv('DATABASE_URL');
-    $pointBot = new PointBot($databaseUrl);
+    //$databaseUrl = getenv('DATABASE_URL');
+    //$pointBot = new PointBot($databaseUrl);
 
     echo "ptBot v1";
     
