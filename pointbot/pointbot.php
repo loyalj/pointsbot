@@ -32,11 +32,11 @@ class PointBot {
         $this->miniPg->save(
             "INSERT INTO awards (action, from_user, to_user, award, value) VALUES (:action, :fromUser, :toUser, :award, :value)",
             array(
-               'action' => $saveAction,
-               'fromUser'   => $fromUser,
-               'toUser'     => $toUser,
-               'award'  => $awardType,
-               'value'  => (int) $awardValue
+               ':action' => $saveAction,
+               ':fromUser'   => $fromUser,
+               ':toUser'     => $toUser,
+               ':award'  => $awardType,
+               ':value'  => (int) $awardValue
             )
         );
 error_log("pb save done");
