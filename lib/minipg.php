@@ -11,7 +11,6 @@ class MiniPG {
     private $connectOpts = null;
     private $db = null;
     private $statement = null;
-    private $charset = 'utf8';
 
 
     /*
@@ -31,7 +30,7 @@ class MiniPG {
         $this->host = $parsedUrl['host'];
         $this->port = $parsedUrl['port'];
         $this->database = $database;
-        $this->connectString = "pgsql:dbname={$this->database};host={$this->host};charset={$this->charset};port={$this->port}";
+        $this->connectString = "pgsql:dbname={$this->database};host={$this->host};port={$this->port}";
         
         $this->connectOpts = [
             PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
