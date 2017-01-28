@@ -28,7 +28,16 @@ class PointBot {
             $returnMessage = $fromUser . ' has taken ' .  abs($awardValue) . ' ' . $awardType . ' from ' . $toUser;
         }
         
-
+        $this->miniPg->save(
+            "INSERT INTO `awards` (`action`, `from`, `to`, `award`, `value`) VALUES (:action, :from, :to, :award, :value)",
+            array(
+               'action' => $saveAction,
+               'from'   => $fromUser,
+               'to'     => $toUser,
+               'award'  => $awardType,
+               'value'  => (int) $awardValue
+            )
+        );
         //$mongo = new MongoClient($this->mongoServer);
         /*$mongo = new MongoClient();
         $db = $mongo->highscores;

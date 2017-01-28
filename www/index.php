@@ -16,11 +16,6 @@ Flight::route('GET /', function(){
 
     echo "ptBot v1";
     
-    $conn = $miniPg->testConnection();
-
-    if($conn) {
-        echo "Connection made";
-    }
 });
 
 /*
@@ -41,11 +36,7 @@ Flight::route('POST /', function(){
     if(empty($triggerWord) || $token != $ourToken) {
         exit;
     }
-    
-    // get the db info and start up the bot
-    $databaseUrl = getenv('DATABASE_URL');
-    $pointBot = new PointBot($databaseUrl);
-    
+   
 
     // Figure out which action to execute TODO: move to inside the bot so controller doesn't know any of this info!
     switch ($triggerWord) {
