@@ -39,7 +39,7 @@ class MiniPG {
         ];
 
         // Connect and store the connection
-        $this->db = new PDO($this->connectString, $this->user, $this->password, $this->connectOpts);
+        $this->db = new PDO($this->connectString, $this->user, $this->password); //, $this->connectOpts);
 	}
 
 
@@ -47,7 +47,9 @@ class MiniPG {
     *
     */
     public function save($query, $data) {
+        error_log("minipg save prepare");
         $stmt = $this->db->prepare($query);
+        error_log("minipg save execute");
         $results = $stmt->execute($data);
 
         return $results;

@@ -27,31 +27,19 @@ class PointBot {
             $saveAction = 'took';
             $returnMessage = $fromUser . ' has taken ' .  abs($awardValue) . ' ' . $awardType . ' from ' . $toUser;
         }
-        
+        error_log($returnMessage);
+        error_log("pb save");
         $this->miniPg->save(
-            "INSERT INTO `awards` (`action`, `from`, `to`, `award`, `value`) VALUES (:action, :from, :to, :award, :value)",
+            "INSERT INTO `awards` (`action`, `from`, `to`, `award`, `value`) VALUES (:action, :fromUser, :toUser, :award, :value)",
             array(
                'action' => $saveAction,
-               'from'   => $fromUser,
-               'to'     => $toUser,
+               'fromUser'   => $fromUser,
+               'toUser'     => $toUser,
                'award'  => $awardType,
                'value'  => (int) $awardValue
             )
         );
-        //$mongo = new MongoClient($this->mongoServer);
-        /*$mongo = new MongoClient();
-        $db = $mongo->highscores;
-        $collection = $db->ledger;*/
-
-        // write to mongo
-        /*$collection->insert(array(
-           'action' => $saveAction,
-           'from'   => $fromUser,
-           'to'     => $toUser,
-           'award'  => $awardType,
-           'value'  => (int) $awardValue
-        ));*/
-
+error_log("pb save done");
         return $returnMessage;
     }
 
