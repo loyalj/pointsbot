@@ -47,9 +47,7 @@ class MiniPG {
     *
     */
     public function save($query, $data) {
-        error_log("minipg save prepare");
         $stmt = $this->db->prepare($query);
-        error_log("minipg save execute");
         $results = $stmt->execute($data);
 
         return $results;

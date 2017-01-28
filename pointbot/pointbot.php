@@ -27,8 +27,7 @@ class PointBot {
             $saveAction = 'took';
             $returnMessage = $fromUser . ' has taken ' .  abs($awardValue) . ' ' . $awardType . ' from ' . $toUser;
         }
-        error_log($returnMessage);
-        error_log("pb save");
+        
         $this->miniPg->save(
             "INSERT INTO awards (action, from_user, to_user, award, value) VALUES (:action, :fromUser, :toUser, :award, :value)",
             array(
@@ -39,7 +38,7 @@ class PointBot {
                ':value'  => (int) $awardValue
             )
         );
-error_log("pb save done");
+
         return $returnMessage;
     }
 

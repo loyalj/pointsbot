@@ -36,11 +36,11 @@ Flight::route('POST /', function(){
     if(empty($triggerWord) || $token != $ourToken) {
         exit;
     }
-error_log("token got");
+
     $databaseUrl = getenv('DATABASE_URL');
     $pointBot = new PointBot($databaseUrl);
     
-error_log("pointbot made");
+
     // Figure out which action to execute TODO: move to inside the bot so controller doesn't know any of this info!
     switch ($triggerWord) {
         case ':thumbsup:':
@@ -63,9 +63,9 @@ error_log("pointbot made");
 	        $awardType     = trim($messageMatches[3]);
 	        $toUser        = trim($messageMatches[4]);
 	        $fromUser      = '<@' . $fromUser . '>';
-	    error_log("about to save");
+	    
 	        $result = $pointBot->recordTransaction($action, $awardValue, $awardType, $toUser, $fromUser);
-            error_log("save");
+            
 
 	    break;
 	    case 'pbstat':
@@ -122,7 +122,7 @@ Flight::route('POST /slash', function(){
         break;
     }
     
-        $channelName = ($channelName) ? $channelName : "temptestbed";
+        $channelName = ($channelName) ? $channelName : "#random";
         $data = "payload=" . json_encode(array(
                 "channel"       =>  "#{$channelName}",
                 "username"      =>  $botName,
