@@ -60,13 +60,14 @@ error_log('getting stats for: ' . $user);
         if(empty($userStats)) {
             return 'no data';
         }
-error_log($userStats);
+        error_log('user stat array');
+error_log(print_r($userStats, true));
         $results = "award stats for {$user}:\n";
         
         foreach ($userStats as $row)
         {
             error_log('row');
-            error_log($row);
+            error_log(print_r($row, true));
             $results .= $row['award'] . ' x ' . $row['tval'] .  "\n";
         }
 
