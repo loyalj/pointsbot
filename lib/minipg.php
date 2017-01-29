@@ -64,7 +64,8 @@ error_log('minipg get');
         error_log('execute query');
 
         //$stmt->execute();
-error_log($stmt->fetch());
+        $row = $stmt->fetch();
+error_log($row);
 
 error_log('no return');
         //return $stmt->fetchAll();
