@@ -65,7 +65,7 @@ error_log('minipg get');
 
         $stmt->execute(array(':user' => $user));
         $row = $stmt->fetch();
-error_log($row);
+error_log(print_r($row, true));
 
 error_log('no return');
         //return $stmt->fetchAll();
