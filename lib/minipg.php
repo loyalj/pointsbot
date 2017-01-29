@@ -64,8 +64,11 @@ error_log('minipg get');
         //error_log($stmt);
         //$stmt = $this->db->prepare("SELECT to_user, award, sum(value) as tval FROM awards where to_user = ? GROUP BY to_user, award ORDER BY tval DESC;");
         error_log('execute query');
+
         //$stmt->execute();
-error_log($stmt->fetchAll());
+error_log($stmt->fetch());
+
+error_log('no return');
         //return $stmt->fetchAll();
     }
 }
