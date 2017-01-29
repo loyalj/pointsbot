@@ -139,6 +139,52 @@ Flight::route('POST /slash', function(){
                 "channel"       =>  "#{$channelName}",
                 "username"      =>  $botName,
                 "text"          =>  $result,
+                /*
+"attachments": [
+        {
+            "fallback": "award stats for @user...",
+            "color": "#bada55",
+            "pretext": "@User has these awards...",
+            "fields": [
+                {
+                    "title": ":car: x 9",
+                    "short": true
+                },
+                {
+                    "title": ":car: x 9",
+                    "short": true
+                },
+                {
+                    "title": "dad x 9",
+                    "short": true
+                },
+                {
+                    "title": ":beer: x 9",
+                    "short": true
+                }
+            ]
+        }
+    ]
+                */
+                "attachments"   =>  array([
+                                        'fallback' => 'fallback text',
+                                        'color' => '#bada55',
+                                        'pretext' => '@user has awards!',
+                                        'fields'  => array(
+                                            [
+                                                'title' => ':car: x 9',
+                                                'short' => true
+                                            ],
+                                            [
+                                                'title' => ':dog: x 8',
+                                                'short' => true
+                                            ],
+                                            [
+                                                'title' => ':house: :horse: x 5',
+                                                'short' => true
+                                            ]
+                                        )
+                                    ]),
                 "icon_emoji"    =>  $botIcon
             ));
 
