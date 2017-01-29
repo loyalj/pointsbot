@@ -46,9 +46,20 @@ class MiniPG {
     /*
     *
     */
-    public function save($query, $data) {
-        $stmt = $this->db->prepare($query);
+    public function save($data) {
+
+        $stmt = $this->db->prepare("INSERT INTO awards (action, from_user, to_user, award, value) VALUES (:action, :fromUser, :toUser, :award, :value)");
         $results = $stmt->execute($data);
+
+        return $results;
+    }
+
+
+    public function getUserStats($user) {
+        //SELECT to_user, award, sum(value) as tval FROM awards where to_user = '<@U3R1BTHB3>' GROUP BY to_user, award ORDER BY tval DESC;
+
+        $stmt = $this->db->prepare("SELECT to_user, award, sum(value) as tval FROM awards where to_user = :user GROUP BY to_user, award ORDER BY tval DESC;");
+        $results = $stmt->execute([':user' => $user]);
 
         return $results;
     }

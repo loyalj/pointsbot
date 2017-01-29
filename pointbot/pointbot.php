@@ -28,8 +28,8 @@ class PointBot {
             $returnMessage = $fromUser . ' has taken ' .  abs($awardValue) . ' ' . $awardType . ' from ' . $toUser;
         }
         
+        // Write data to database
         $this->miniPg->save(
-            "INSERT INTO awards (action, from_user, to_user, award, value) VALUES (:action, :fromUser, :toUser, :award, :value)",
             array(
                ':action' => $saveAction,
                ':fromUser'   => $fromUser,
@@ -55,15 +55,22 @@ class PointBot {
             array('$sort'  => array('value' => -1)),
         ));*/
 
-        if(empty($userStats['result'])) {
-            return '';
+        $userStats = $this->miniPg->getUserStats($user);
+
+        if(empty($userStats)) {
+            return 'no data';
         }
 
         $results = "award stats for {$user}:\n";
         
-        foreach ($userStats['result'] as $stat) {
-            $results .= $stat['_id'] . ' x ' . $stat['value'] .  "\n";
+        foreach ($userStats as $row)
+        {
+            $results .= $row['award'] . ' x ' . $row['tval'] .  "\n";
         }
+
+        /*foreach ($userStats['result'] as $stat) {
+            $results .= $stat['_id'] . ' x ' . $stat['value'] .  "\n";
+        }*/
         
         return $results;
     }
