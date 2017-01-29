@@ -57,10 +57,10 @@ class MiniPG {
 
     public function getUserStats($user) {
         //SELECT to_user, award, sum(value) as tval FROM awards where to_user = '<@U3R1BTHB3>' GROUP BY to_user, award ORDER BY tval DESC;
-
+error_lof('minipg get');
         $stmt = $this->db->prepare("SELECT to_user, award, sum(value) as tval FROM awards where to_user = :user GROUP BY to_user, award ORDER BY tval DESC;");
         $results = $stmt->execute([':user' => $user]);
-
+error_log($results->fecthAll());
         return $results;
     }
 }

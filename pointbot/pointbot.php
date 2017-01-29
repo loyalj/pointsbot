@@ -54,24 +54,26 @@ class PointBot {
             array('$match' => array('value' => array('$ne' => 0))),
             array('$sort'  => array('value' => -1)),
         ));*/
-
+error_log('getting stats for: ' . $user);
         $userStats = $this->miniPg->getUserStats($user);
 
         if(empty($userStats)) {
             return 'no data';
         }
-
+error_log($userStats);
         $results = "award stats for {$user}:\n";
         
         foreach ($userStats as $row)
         {
+            error_log('row');
+            error_log($row);
             $results .= $row['award'] . ' x ' . $row['tval'] .  "\n";
         }
 
         /*foreach ($userStats['result'] as $stat) {
             $results .= $stat['_id'] . ' x ' . $stat['value'] .  "\n";
         }*/
-        
+        error_log($results);
         return $results;
     }
 
