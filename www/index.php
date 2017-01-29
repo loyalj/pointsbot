@@ -22,6 +22,17 @@ Flight::route('GET /', function(){
 *
 *
 */
+Flight::route('GET /debug', function(){
+    $databaseUrl = getenv('DATABASE_URL');
+    $pointBot = new PointBot($databaseUrl);
+    $pointBot->getUserStats('<@U3R1BTHB3>');
+    
+});
+
+/*
+*
+*
+*/
 Flight::route('POST /', function(){
     // Collect the POST vars that slack sends
     $request = Flight::request();
