@@ -60,7 +60,7 @@ class MiniPG {
 error_log('minipg get');
         $stmt = $this->db->prepare("SELECT to_user, award, sum(value) as tval FROM awards where to_user = :user GROUP BY to_user, award ORDER BY tval DESC;");
         $stmt->execute([':user' => $user]);
-error_log($stmt->fecthAll());
+error_log($stmt->fetchAll());
         return $stmt;
     }
 }
