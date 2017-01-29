@@ -43,8 +43,7 @@ class PointBot {
     }
 
     public function getUserStats($user) {
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
+
         /*$mongo = new MongoClient();
         $db = $mongo->highscores;
         $collection = $db->ledger;*/
