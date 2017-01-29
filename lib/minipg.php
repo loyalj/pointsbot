@@ -56,21 +56,17 @@ class MiniPG {
 
 
     public function getUserStats($user) {
-        $this->db->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
         //SELECT to_user, award, sum(value) as tval FROM awards where to_user = '<@U3R1BTHB3>' GROUP BY to_user, award ORDER BY tval DESC;
-        //$stmt = $this->db->prepare('SELECT * FROM awards WHERE to_user = :user');
         $stmt = $this->db->prepare("SELECT to_user, award, sum(value) as tval FROM awards where to_user = :user GROUP BY to_user, award ORDER BY tval DESC;");
-        error_log('execute query');
-
         $stmt->execute(array(':user' => $user));
+        
         $results = $stmt->fetchAll();
 
         if($results) {
-            error_log(print_r($row, true));
             return $results;
         }
 
 
-        return "no results!";
+        return false;
     }
 }
