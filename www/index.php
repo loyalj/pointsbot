@@ -103,28 +103,7 @@ Flight::route('POST /', function(){
     }
     
     header('Content-Type: application/json');
-    echo json_encode(array(
-        'text'=> $result,
-        'attachments'   =>  array([
-            'fallback' => 'fallback text',
-            'color' => '#bada55',
-            'pretext' => '@user has awards!',
-            'fields'  => array(
-                [
-                    'title' => ':car: x 9',
-                    'short' => true
-                ],
-                [
-                    'title' => ':dog: x 8',
-                    'short' => true
-                ],
-                [
-                    'title' => ':house: :horse: x 5',
-                    'short' => true
-                ]
-            )
-        ])
-    ));
+    echo json_encode($result));
 });
 
 

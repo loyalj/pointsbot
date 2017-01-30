@@ -49,7 +49,7 @@ class PointBot {
             )
         );
 
-        return $returnMessage;
+        return ['text' => $returnMessage];
     }
 
 
@@ -67,13 +67,27 @@ class PointBot {
         }
 
         $results = "award stats for {$user}:\n";
+        $fields = [];
         
         foreach ($userStats as $row)
         {
-            $results .= $row['award'] . ' x ' . $row['tval'] .  "\n";
+            //$results .= $row['award'] . ' x ' . $row['tval'] .  "\n";
+
+            $fields[] = [
+                'title' => $row['award'] . ' x ' . $row['tval'],
+                'short' => true
+            ];
         }
 
-        return $results;
+        return [
+            'text' => $results,
+            'attachments'   =>  array([
+                'fallback' => 'fallback text',
+                'color' => '#bada55',
+                'pretext' => '@user has awards!',
+                'fields'  => $fields
+            ])
+        ];
     }
 
 
@@ -106,15 +120,15 @@ class PointBot {
             $result .= $stat['_id'] . ' with ' . $stat['value'] . " gives\n";
         }
 
-        return $result;
+        return ['text'] => $result];
     }
-    
+
     /*
     *
     *
     */
     public function getTopTaker() {
-        return 'the top taker is: ';
+        return ['text' => 'the top taker is: '];
     }
 
 
@@ -142,6 +156,6 @@ class PointBot {
         $result .= ">_pbgive_ - Shows a list of  the top givingest users\n";
         $result .= ">_pbstat <user>_ - Shows the awards given to <user>.  If user is omitted then you will see your own awards\n";
 
-        return $result;
+        return ['text' => $result];
     }
 }
