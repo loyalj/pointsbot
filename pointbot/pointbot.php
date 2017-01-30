@@ -58,7 +58,7 @@ class PointBot {
     *
     */
     public function getUserStats($user) {
-        
+
         $userStats = $this->miniPg->getUserStats($user);
 
         if(empty($userStats)) {
@@ -76,7 +76,7 @@ class PointBot {
         }
 
         return [
-            'text' => "award stats for {$user}:\n",
+            'text' => "{$user} has been awarded all of these wonderful prizes:\n",
             'attachments'   =>  array([
                 'fallback' => "award stats for {$user}:\n",
                 'color' => '#87CEEB',
