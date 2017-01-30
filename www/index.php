@@ -105,7 +105,28 @@ Flight::route('POST /', function(){
     }
     
     header('Content-Type: application/json');
-    echo json_encode(array('text'=> $result));
+    echo json_encode(array(
+        'text'=> $result
+        'attachments'   =>  array([
+            'fallback' => 'fallback text',
+            'color' => '#bada55',
+            'pretext' => '@user has awards!',
+            'fields'  => array(
+                [
+                    'title' => ':car: x 9',
+                    'short' => true
+                ],
+                [
+                    'title' => ':dog: x 8',
+                    'short' => true
+                ],
+                [
+                    'title' => ':house: :horse: x 5',
+                    'short' => true
+                ]
+            )
+        ])
+    ));
 });
 
 
@@ -139,57 +160,10 @@ Flight::route('POST /slash', function(){
                 "channel"       =>  "#{$channelName}",
                 "username"      =>  $botName,
                 "text"          =>  $result,
-                /*
-"attachments": [
-        {
-            "fallback": "award stats for @user...",
-            "color": "#bada55",
-            "pretext": "@User has these awards...",
-            "fields": [
-                {
-                    "title": ":car: x 9",
-                    "short": true
-                },
-                {
-                    "title": ":car: x 9",
-                    "short": true
-                },
-                {
-                    "title": "dad x 9",
-                    "short": true
-                },
-                {
-                    "title": ":beer: x 9",
-                    "short": true
-                }
-            ]
-        }
-    ]
-                */
-                "attachments"   =>  array([
-                                        'fallback' => 'fallback text',
-                                        'color' => '#bada55',
-                                        'pretext' => '@user has awards!',
-                                        'fields'  => array(
-                                            [
-                                                'title' => ':car: x 9',
-                                                'short' => true
-                                            ],
-                                            [
-                                                'title' => ':dog: x 8',
-                                                'short' => true
-                                            ],
-                                            [
-                                                'title' => ':house: :horse: x 5',
-                                                'short' => true
-                                            ]
-                                        )
-                                    ]),
                 "icon_emoji"    =>  $botIcon
             ));
 
         // You can get your webhook endpoint from your Slack settings
-        error_log(print_r($data, true));
         $ch = curl_init(OUR_URL_FLIP);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
