@@ -58,21 +58,17 @@ class PointBot {
     *
     */
     public function getUserStats($user) {
-
-
+        
         $userStats = $this->miniPg->getUserStats($user);
 
         if(empty($userStats)) {
-            return 'no data';
+            return ['text' => 'Dunno who that is!'];
         }
 
-        $results = "award stats for {$user}:\n";
         $fields = [];
         
         foreach ($userStats as $row)
         {
-            //$results .= $row['award'] . ' x ' . $row['tval'] .  "\n";
-
             $fields[] = [
                 'title' => $row['award'] . ' x ' . $row['tval'],
                 'short' => true
@@ -80,11 +76,10 @@ class PointBot {
         }
 
         return [
-            'text' => $results,
+            'text' => "award stats for {$user}:\n",
             'attachments'   =>  array([
-                'fallback' => 'fallback text',
-                'color' => '#bada55',
-                'pretext' => '@user has awards!',
+                'fallback' => "award stats for {$user}:\n",
+                'color' => '#87CEEB',
                 'fields'  => $fields
             ])
         ];
