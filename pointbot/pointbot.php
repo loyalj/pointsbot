@@ -70,7 +70,7 @@ class PointBot {
         foreach ($userStats as $row)
         {
             $fields[] = [
-                'title' => $row['award'] . ' x ' . $row['tval'],
+                'title' => $row['tval'] . ' x ' . $row['award'],
                 'short' => true
             ];
         }
