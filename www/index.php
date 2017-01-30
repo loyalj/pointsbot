@@ -104,7 +104,7 @@ Flight::route('POST /', function(){
     
     header('Content-Type: application/json');
     echo json_encode(array(
-        'text'=> $result
+        'text'=> $result,
         'attachments'   =>  array([
             'fallback' => 'fallback text',
             'color' => '#bada55',
