@@ -77,8 +77,6 @@ Flight::route('POST /', function(){
 	        $fromUser      = '<@' . $fromUser . '>';
 	    
 	        $result = $pointBot->recordTransaction($action, $awardValue, $awardType, $toUser, $fromUser);
-            
-
 	    break;
 	    case 'pbstat':
             $messageMatches = null;
