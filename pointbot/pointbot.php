@@ -120,7 +120,7 @@ class PointBot {
             $result .= $stat['_id'] . ' with ' . $stat['value'] . " gives\n";
         }
 
-        return ['text'] => $result];
+        return ['text' => $result];
     }
 
     /*
